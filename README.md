@@ -18,8 +18,8 @@ Make sure the requirements above already install on your system.
 Clone the project to your directory and install the dependencies.
 
 ```bash
-$ git clone https://github.com/wisnuuakbr/simple-rest-go-echo
-$ cd simple-rest-go-echo
+$ git clone https://github.com/jakib01/rest-golang-echo
+$ cd rest-golang-echo
 $ go mod tidy
 ```
 
