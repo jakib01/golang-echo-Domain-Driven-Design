@@ -21,3 +21,5 @@
 .idea/
 .vscode/
 *.code-workspace
+
+.env
