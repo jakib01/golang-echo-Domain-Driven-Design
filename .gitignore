@@ -1,1 +1,23 @@
-.env
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output files
+*.out
+
+# Go specific
+*.test
+*.prof
+
+# Dependency directories
+/vendor/
+/go.sum
+/go.mod
+
+# IDE files
+.idea/
+.vscode/
+*.code-workspace
