@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// setup for routing
+// SetupRoutes setup for routing
 func SetupRoutes(e *echo.Echo) {
 	e.GET("/course", Handler.GetCourse)
 	e.POST("/course", Handler.CreateCourse)
