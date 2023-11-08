@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/joho/godotenv"
+	"github.com/labstack/gommon/log"
 	"os"
 	"simple-rest-go-echo/Config"
-	"simple-rest-go-echo/Models"
 	"simple-rest-go-echo/Routes"
 
 	"github.com/labstack/echo/v4"
@@ -12,13 +12,8 @@ import (
 
 func main() {
 	// Load environment variables from .env file
-	//if err := godotenv.Load(); err != nil {
-	//	log.Fatalf("Error loading .env file: %v", err)
-	//}
-
-	err := godotenv.Load()
-	if err != nil {
-		return
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
 	}
 
 	// Initialize Echo instance
@@ -29,11 +24,11 @@ func main() {
 	defer Config.GetDB().DB()
 
 	// Perform migrations using AutoMigrate
-	db := Config.GetDB()
-	err = db.AutoMigrate(&Models.Course{})
-	if err != nil {
-		panic(err)
-	}
+	//db := Config.GetDB()
+	//err = db.AutoMigrate(&Models.Course{})
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	// Set up Routes
 	Routes.SetupRoutes(e)
