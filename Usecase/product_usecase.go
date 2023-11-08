@@ -1,22 +1,25 @@
 package Usecase
 
 import (
+	"simple-rest-go-echo/Infra"
 	"simple-rest-go-echo/Models"
 )
 
-type ProductUseCase11 struct {
-	IProductRepo Models.IRepo
+type ProductUseCase struct {
+	IProductRepository Models.IProductRepository
 }
 
-func NewProductUseCase() Models.IProductUseCase {
-	return &ProductUseCase11{}
+func NewProductUseCase() *ProductUseCase {
+	return &ProductUseCase{
+		IProductRepository: Infra.NewIProductRepository(),
+	}
 }
 
-func (p ProductUseCase11) Create(product *[]Models.Product) error {
-
-	//err := p.IProductRepo.CreateMySql(product)
-	//if err != nil {
-	//	return err
-	//}
+func (p ProductUseCase) Create(product *[]Models.Product) error {
+	println(product)
+	err := p.IProductRepository.CreateMySql(product)
+	if err != nil {
+		return err
+	}
 	return nil
 }

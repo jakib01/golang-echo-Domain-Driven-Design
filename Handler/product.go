@@ -8,12 +8,12 @@ import (
 )
 
 type ProductHandler struct {
-	IProduct Models.IProductUseCase
+	IProductUseCase Models.IProductUseCase
 }
 
 func NewProductHandler() *ProductHandler {
 	return &ProductHandler{
-		IProduct: Usecase.NewProductUseCase(),
+		IProductUseCase: Usecase.NewProductUseCase(),
 	}
 }
 
@@ -28,7 +28,7 @@ func (h ProductHandler) CreateProduct(c echo.Context) error {
 		return echo.ErrBadRequest
 	}
 
-	err := h.IProduct.Create(request)
+	err := h.IProductUseCase.Create(request)
 	if err != nil {
 		return err
 	}

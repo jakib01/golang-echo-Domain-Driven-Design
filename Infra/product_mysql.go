@@ -1,20 +1,14 @@
 package Infra
 
-import (
-	"simple-rest-go-echo/Models"
-)
+import "simple-rest-go-echo/Models"
 
-type ProductUseCase22 struct {
-	IProductRepo Models.IRepo
+type ProductRepository struct{}
+
+func NewIProductRepository() *ProductRepository {
+	return &ProductRepository{}
 }
 
-func NewProductRepo() Models.IRepo {
-	return &ProductUseCase22{}
-}
-
-func (p ProductUseCase22) CreateMySql(product *[]Models.Product) error {
-
-	//fmt.Println(product)
-
+func (p ProductRepository) CreateMySql(product *[]Models.Product) error {
+	println(product)
 	return nil
 }
