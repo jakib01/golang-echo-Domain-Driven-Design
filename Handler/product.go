@@ -22,7 +22,7 @@ func (h ProductHandler) GetProduct(c echo.Context) error {
 }
 
 func (h ProductHandler) CreateProduct(c echo.Context) error {
-	request := &[]Models.Product{}
+	request := &Models.Product{}
 	if err := c.Bind(request); err != nil {
 		c.Echo().Logger.Error(err)
 		return echo.ErrBadRequest
@@ -30,7 +30,11 @@ func (h ProductHandler) CreateProduct(c echo.Context) error {
 
 	err := h.IProductUseCase.Create(request)
 	if err != nil {
-		return err
+		data := map[string]interface{}{
+			"error": err.Error(),
+		}
+		return c.JSON(http.StatusInternalServerError, data)
 	}
-	return c.JSON(http.StatusUnprocessableEntity, err)
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "Create Successfully!"})
 }

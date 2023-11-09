@@ -1,8 +1,10 @@
 package Usecase
 
 import (
+	"simple-rest-go-echo/Common"
 	"simple-rest-go-echo/Infra"
 	"simple-rest-go-echo/Models"
+	"time"
 )
 
 type ProductUseCase struct {
@@ -15,10 +17,20 @@ func NewProductUseCase() *ProductUseCase {
 	}
 }
 
-func (p ProductUseCase) Create(product *[]Models.Product) error {
-	println(product)
-	err := p.IProductRepository.CreateMySql(product)
-	if err != nil {
+func (p ProductUseCase) Create(request *Models.Product) error {
+	// prepare product data
+	product := &Models.Product{
+		ProductTable: Models.ProductTable{
+			ProductName:   request.ProductName,
+			Description:   request.Description,
+			Price:         request.Price,
+			StockQuantity: request.StockQuantity,
+			CategoryId:    request.CategoryId,
+			Times:         Common.Times{CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		},
+	}
+
+	if err := p.IProductRepository.CreateProduct(product); err != nil {
 		return err
 	}
 	return nil
