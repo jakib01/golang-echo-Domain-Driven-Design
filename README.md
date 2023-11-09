@@ -18,8 +18,8 @@ Make sure the requirements above already install on your system.
 Clone the project to your directory and install the dependencies.
 
 ```bash
-$ git clone https://github.com/jakib01/rest-golang-echo
-$ cd rest-golang-echo
+$ git clone https://github.com/jakib01/golang-echo-Domain-Driven-Design.git
+$ cd golang-echo-Domain-Driven-Design
 $ go mod tidy
 ```
 
@@ -32,7 +32,7 @@ DB_HOST=      localhost
 DB_PORT=      3306
 DB_USER=      root
 DB_PASSWORD=
-DB_NAME=      altera-course
+DB_NAME=      online-store
 SERVER_PORT=  8080
 ```
 
@@ -47,8 +47,6 @@ $ go run main.go
 These are the endpoints we will use to create, read, update and delete the course data.
 
 ```bash
-POST course → Add new course data
-GET course → Retrieves all the course data
-PUT course/{id} → Update the course data
-DELETE course/{id} → Delete the course data
+POST product-create → Add new create data
+GET product → Retrieves all the create data
 ```
