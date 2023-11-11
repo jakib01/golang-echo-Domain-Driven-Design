@@ -15,7 +15,19 @@ func NewIProductRepository(db *gorm.DB) *ProductRepository {
 	}
 }
 
+func (p ProductRepository) TxStart() (*gorm.DB, error) {
+	tx := p.db.Begin()
+	return tx, tx.Error
+}
+
+func (p ProductRepository) TxCommit(tx *gorm.DB) error {
+	return tx.Commit().Error
+}
+
+func (p ProductRepository) TxRollback(tx *gorm.DB) {
+	tx.Rollback()
+}
+
 func (p ProductRepository) CreateProduct(request *Models.Product) error {
-	//db := Config.GetDB()
 	return p.db.Create(request).Error
 }

@@ -24,14 +24,14 @@ func main() {
 	defer Config.GetDB().DB()
 
 	// Perform migrations using AutoMigrate
-	//db := Config.GetDB()
+	db := Config.GetDB()
 	//err = db.AutoMigrate(&Models.Course{})
 	//if err != nil {
 	//	panic(err)
 	//}
 
 	// Set up Routes
-	Routes.SetupRoutes(e)
+	Routes.SetupRoutes(e, db)
 
 	// Start the server
 	serverPort := os.Getenv("SERVER_PORT")

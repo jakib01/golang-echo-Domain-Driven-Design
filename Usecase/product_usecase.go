@@ -19,6 +19,11 @@ func NewProductUseCase(db *gorm.DB) *ProductUseCase {
 }
 
 func (p ProductUseCase) Create(request *Models.Product) error {
+	tx, txErr := p.IProductRepository.TxStart()
+	if txErr != nil {
+		return txErr
+	}
+
 	// prepare product data
 	product := &Models.Product{
 		ProductTable: Models.ProductTable{
@@ -32,6 +37,12 @@ func (p ProductUseCase) Create(request *Models.Product) error {
 	}
 
 	if err := p.IProductRepository.CreateProduct(product); err != nil {
+		p.IProductRepository.TxRollback(tx)
+		return err
+	}
+
+	if err := p.IProductRepository.TxCommit(tx); err != nil {
+		p.IProductRepository.TxRollback(tx)
 		return err
 	}
 	return nil
