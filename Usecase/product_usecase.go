@@ -18,6 +18,14 @@ func NewProductUseCase(db *gorm.DB) *ProductUseCase {
 	}
 }
 
+func (p ProductUseCase) GetAllProduct() ([]Models.Product, error) {
+	product, err := p.IProductRepository.FetchAllProduct()
+	if err != nil {
+		return nil, err
+	}
+	return product, nil
+}
+
 func (p ProductUseCase) Create(request *Models.Product) error {
 	tx, txErr := p.IProductRepository.TxStart()
 	if txErr != nil {

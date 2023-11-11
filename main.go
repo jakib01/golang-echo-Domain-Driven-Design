@@ -25,6 +25,7 @@ func main() {
 
 	// Perform migrations using AutoMigrate
 	db := Config.GetDB()
+
 	//err = db.AutoMigrate(&Models.Course{})
 	//if err != nil {
 	//	panic(err)

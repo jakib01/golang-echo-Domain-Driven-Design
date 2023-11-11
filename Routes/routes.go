@@ -12,6 +12,6 @@ func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 	productHandler := Handler.NewProductHandler(db)
 
 	// Product route
-	e.GET("/product", productHandler.GetProduct)
+	e.GET("/products", productHandler.GetAllProduct)
 	e.POST("/product-create", productHandler.CreateProduct)
 }

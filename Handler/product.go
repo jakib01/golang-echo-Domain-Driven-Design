@@ -18,8 +18,16 @@ func NewProductHandler(db *gorm.DB) *ProductHandler {
 	}
 }
 
-func (h ProductHandler) GetProduct(c echo.Context) error {
-	return nil
+func (h ProductHandler) GetAllProduct(c echo.Context) error {
+	product, err := h.IProductUseCase.GetAllProduct()
+	if err != nil {
+		data := map[string]interface{}{
+			"error": err.Error(),
+		}
+		return c.JSON(http.StatusInternalServerError, data)
+	}
+
+	return c.JSON(http.StatusOK, product)
 }
 
 func (h ProductHandler) CreateProduct(c echo.Context) error {

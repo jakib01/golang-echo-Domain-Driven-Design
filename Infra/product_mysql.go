@@ -28,6 +28,16 @@ func (p ProductRepository) TxRollback(tx *gorm.DB) {
 	tx.Rollback()
 }
 
+func (p ProductRepository) FetchAllProduct() ([]Models.Product, error) {
+	var products []Models.Product
+	result := p.db.Find(&products)
+	if result.Error != nil {
+		return products, result.Error
+	}
+
+	return products, nil
+}
+
 func (p ProductRepository) CreateProduct(request *Models.Product) error {
 	return p.db.Create(request).Error
 }
