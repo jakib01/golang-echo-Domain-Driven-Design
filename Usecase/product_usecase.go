@@ -1,6 +1,7 @@
 package Usecase
 
 import (
+	"gorm.io/gorm"
 	"simple-rest-go-echo/Common"
 	"simple-rest-go-echo/Infra"
 	"simple-rest-go-echo/Models"
@@ -11,9 +12,9 @@ type ProductUseCase struct {
 	IProductRepository Models.IProductRepository
 }
 
-func NewProductUseCase() *ProductUseCase {
+func NewProductUseCase(db *gorm.DB) *ProductUseCase {
 	return &ProductUseCase{
-		IProductRepository: Infra.NewIProductRepository(),
+		IProductRepository: Infra.NewIProductRepository(db),
 	}
 }
 

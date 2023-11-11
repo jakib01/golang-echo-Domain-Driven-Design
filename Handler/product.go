@@ -2,6 +2,7 @@ package Handler
 
 import (
 	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 	"net/http"
 	"simple-rest-go-echo/Models"
 	"simple-rest-go-echo/Usecase"
@@ -11,9 +12,9 @@ type ProductHandler struct {
 	IProductUseCase Models.IProductUseCase
 }
 
-func NewProductHandler() *ProductHandler {
+func NewProductHandler(db *gorm.DB) *ProductHandler {
 	return &ProductHandler{
-		IProductUseCase: Usecase.NewProductUseCase(),
+		IProductUseCase: Usecase.NewProductUseCase(db),
 	}
 }
 

@@ -21,5 +21,6 @@ type IProductUseCase interface {
 }
 
 type IProductRepository interface {
+	Common.Repository
 	CreateProduct(request *Product) error
 }

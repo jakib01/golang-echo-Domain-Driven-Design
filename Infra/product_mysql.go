@@ -1,17 +1,21 @@
 package Infra
 
 import (
-	"simple-rest-go-echo/Config"
+	"gorm.io/gorm"
 	"simple-rest-go-echo/Models"
 )
 
-type ProductRepository struct{}
+type ProductRepository struct {
+	db *gorm.DB
+}
 
-func NewIProductRepository() *ProductRepository {
-	return &ProductRepository{}
+func NewIProductRepository(db *gorm.DB) *ProductRepository {
+	return &ProductRepository{
+		db: db,
+	}
 }
 
 func (p ProductRepository) CreateProduct(request *Models.Product) error {
-	db := Config.GetDB()
-	return db.Create(request).Error
+	//db := Config.GetDB()
+	return p.db.Create(request).Error
 }
