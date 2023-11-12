@@ -26,6 +26,14 @@ func (p ProductUseCase) GetAllProduct() ([]Models.Product, error) {
 	return product, nil
 }
 
+func (p ProductUseCase) GetProduct(request *Models.SingleProductInput) (Models.Product, error) {
+	product, err := p.IProductRepository.FetchProductById(request.ProductId)
+	if err != nil {
+		return product, err
+	}
+	return product, nil
+}
+
 func (p ProductUseCase) Create(request *Models.Product) error {
 	tx, txErr := p.IProductRepository.TxStart()
 	if txErr != nil {

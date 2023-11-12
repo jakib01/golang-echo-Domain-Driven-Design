@@ -16,13 +16,19 @@ type ProductTable struct {
 	Common.Times
 }
 
+type SingleProductInput struct {
+	ProductId int64 `json:"product_id" param:"ProductId" validate:"required"`
+}
+
 type IProductUseCase interface {
 	Create(request *Product) error
 	GetAllProduct() ([]Product, error)
+	GetProduct(request *SingleProductInput) (Product, error)
 }
 
 type IProductRepository interface {
 	Common.Repository
 	CreateProduct(request *Product) error
 	FetchAllProduct() ([]Product, error)
+	FetchProductById(productId int64) (Product, error)
 }

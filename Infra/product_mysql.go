@@ -38,6 +38,15 @@ func (p ProductRepository) FetchAllProduct() ([]Models.Product, error) {
 	return products, nil
 }
 
+func (p ProductRepository) FetchProductById(productId int64) (Models.Product, error) {
+	result := Models.Product{}
+	err := p.db.
+		Table("products").
+		Where("product_id = ?", productId).
+		First(&result).Error
+	return result, err
+}
+
 func (p ProductRepository) CreateProduct(request *Models.Product) error {
 	return p.db.Create(request).Error
 }
