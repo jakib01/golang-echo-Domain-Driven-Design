@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/gommon/log"
+	"golang-echo-Domain-Driven-Design/Config"
+	"golang-echo-Domain-Driven-Design/Routes"
 	"os"
-	"simple-rest-go-echo/Config"
-	"simple-rest-go-echo/Routes"
 
 	"github.com/labstack/echo/v4"
 )

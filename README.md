@@ -1,6 +1,6 @@
 # Simple RestAPI using GO Echo Framework
 
-simple RestAPI with Go, Echo, Gorm, and MySQL
+simple RestAPI with Go, Echo, Gorm, MySQL and Domain-Driven Design(DDD) architecture
 
 ## Requirements
 
@@ -48,5 +48,6 @@ These are the endpoints we will use to create, read, update and delete the cours
 
 ```bash
 POST product-create → Add new create data
-GET product → Retrieves all the create data
+GET products → Retrieves all the create data
+GET product/{id} → Retrieves single the create data
 ```

@@ -1,8 +1,9 @@
 package Infra
 
 import (
+	"golang-echo-Domain-Driven-Design/Models"
 	"gorm.io/gorm"
-	"simple-rest-go-echo/Models"
+	"time"
 )
 
 type ProductRepository struct {
@@ -49,4 +50,21 @@ func (p ProductRepository) FetchProductById(productId int64) (Models.Product, er
 
 func (p ProductRepository) CreateProduct(request *Models.Product) error {
 	return p.db.Create(request).Error
+}
+
+func (p ProductRepository) UpdateProduct(productId int64, request *Models.Product) error {
+	return p.db.Model(&Models.Product{}).
+		Where("product_id = ?", productId).
+		Updates(map[string]interface{}{
+			"product_name":   request.ProductName,
+			"description":    request.Description,
+			"price":          request.Price,
+			"stock_quantity": request.StockQuantity,
+			"category_id":    request.CategoryId,
+			"updated_at":     time.Now(),
+		}).Error
+}
+
+func (p ProductRepository) DeleteProduct(productId int64) error {
+	return p.db.Delete(&Models.Product{}, "product_id = ?", productId).Error
 }

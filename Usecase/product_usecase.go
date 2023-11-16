@@ -1,10 +1,11 @@
 package Usecase
 
 import (
+	"golang-echo-Domain-Driven-Design/Common"
+	"golang-echo-Domain-Driven-Design/Infra"
+	"golang-echo-Domain-Driven-Design/Models"
 	"gorm.io/gorm"
-	"simple-rest-go-echo/Common"
-	"simple-rest-go-echo/Infra"
-	"simple-rest-go-echo/Models"
+	"strconv"
 	"time"
 )
 
@@ -61,5 +62,61 @@ func (p ProductUseCase) Create(request *Models.Product) error {
 		p.IProductRepository.TxRollback(tx)
 		return err
 	}
+	return nil
+}
+
+func (p ProductUseCase) Update(productId string, request *Models.Product) error {
+	tx, txErr := p.IProductRepository.TxStart()
+	if txErr != nil {
+		return txErr
+	}
+	productID, _ := strconv.Atoi(productId)
+
+	product, err := p.IProductRepository.FetchProductById(int64(productID))
+	if err != nil {
+		return err
+	}
+
+	// prepare product data for update
+	productUpdate := &Models.Product{
+		ProductTable: Models.ProductTable{
+			ProductName:   request.ProductName,
+			Description:   request.Description,
+			Price:         request.Price,
+			StockQuantity: request.StockQuantity,
+			CategoryId:    request.CategoryId,
+			Times:         Common.Times{CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		},
+	}
+
+	if err := p.IProductRepository.UpdateProduct(int64(product.ProductId), productUpdate); err != nil {
+		p.IProductRepository.TxRollback(tx)
+		return err
+	}
+
+	if err := p.IProductRepository.TxCommit(tx); err != nil {
+		p.IProductRepository.TxRollback(tx)
+		return err
+	}
+	return nil
+}
+
+func (p ProductUseCase) Delete(productId string) error {
+	tx, txErr := p.IProductRepository.TxStart()
+	if txErr != nil {
+		return txErr
+	}
+	productID, _ := strconv.Atoi(productId)
+
+	if err := p.IProductRepository.DeleteProduct(int64(productID)); err != nil {
+		p.IProductRepository.TxRollback(tx)
+		return err
+	}
+
+	if err := p.IProductRepository.TxCommit(tx); err != nil {
+		p.IProductRepository.TxRollback(tx)
+		return err
+	}
+
 	return nil
 }

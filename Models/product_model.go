@@ -1,6 +1,6 @@
 package Models
 
-import "simple-rest-go-echo/Common"
+import "golang-echo-Domain-Driven-Design/Common"
 
 type Product struct {
 	ProductTable
@@ -24,6 +24,8 @@ type IProductUseCase interface {
 	Create(request *Product) error
 	GetAllProduct() ([]Product, error)
 	GetProduct(request *SingleProductInput) (Product, error)
+	Update(productId string, request *Product) error
+	Delete(productId string) error
 }
 
 type IProductRepository interface {
@@ -31,4 +33,6 @@ type IProductRepository interface {
 	CreateProduct(request *Product) error
 	FetchAllProduct() ([]Product, error)
 	FetchProductById(productId int64) (Product, error)
+	UpdateProduct(productId int64, request *Product) error
+	DeleteProduct(productId int64) error
 }
