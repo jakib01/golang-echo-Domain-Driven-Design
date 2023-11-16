@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "8894d9b9-668e-4010-9152-5b650b581670",
+		"name": "Online-store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23668010",
+		"_collection_link": "https://speeding-zodiac-550239.postman.co/workspace/My-Workspace~5b737b18-1dad-4121-8df2-3921fa8a56a0/collection/23668010-8894d9b9-668e-4010-9152-5b650b581670?action=share&source=collection_link&creator=23668010"
+	},
+	"item": [
+		{
+			"name": "product-create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_name\": \"first product\",\r\n    \"description\": \"first product description\",\r\n    \"price\": 100,\r\n    \"stock_quantity\": 20,\r\n    \"category_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/product-create",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product-create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/product/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_name\": \"adsfasdf \",\r\n    \"description\": \"fiadsfasdfrst product \",\r\n    \"price\": 1000000,\r\n    \"stock_quantity\": 2000,\r\n    \"category_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/product-update/4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product-update",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/product-delete/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product-delete",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:1323",
+			"type": "string"
+		}
+	]
+}

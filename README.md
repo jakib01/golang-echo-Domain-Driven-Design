@@ -48,6 +48,8 @@ These are the endpoints we will use to create, read, update and delete the cours
 
 ```bash
 POST product-create → Add new create data
-GET products → Retrieves all the create data
-GET product/{id} → Retrieves single the create data
+GET products → Retrieves all the created data
+GET product/{id} → Retrieves single created data
+PUT product-update/{id} → Update single created data
+DELETE product-delete/{id} → Delete created data
 ```
